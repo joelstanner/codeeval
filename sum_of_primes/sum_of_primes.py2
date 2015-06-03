@@ -1,0 +1,41 @@
+"""Write a program which determines the sum of the first 1000 prime numbers.
+
+INPUT SAMPLE:
+
+There is no input for this program.
+
+OUTPUT SAMPLE:
+
+Print to stdout the sum of the first 1000 prime numbers.
+
+    3682913
+"""
+
+from __future__ import print_function
+from math import sqrt
+from itertools import count, islice
+
+
+def is_prime(n):
+    if n < 2:
+        return False
+    return all(n % i for i in islice(count(2), int(sqrt(n)-1)))
+
+
+def sum_the_primes():
+    """Check if number is prime, add to running total if so"""
+    primes = 0
+    prime_sum = 0
+    x = 0
+
+    while primes < 1000:
+        if is_prime(x):
+            prime_sum += x
+            primes += 1
+
+        x += 1
+
+    print(prime_sum)
+
+if __name__ == '__main__':
+    sum_the_primes()

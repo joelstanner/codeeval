@@ -1,0 +1,32 @@
+"""Write a program which determines the largest prime palindrome less than 1000.
+
+INPUT SAMPLE:
+
+There is no input for this program.
+
+OUTPUT SAMPLE:
+
+Print to stdout the largest prime palindrome less than 1000.
+    929
+"""
+from __future__ import print_function
+from math import sqrt
+from itertools import count, islice
+
+
+def is_prime(n):
+    if n < 2:
+        return False
+    return all(n % i for i in islice(count(2), int(sqrt(n)-1)))
+
+
+def find_palindrome():
+    for x in xrange(1000, 0, -1):
+        if is_prime(x):
+            if str(x) == str(x)[::-1]:
+                print(x)
+                break
+
+
+if __name__ == '__main__':
+    find_palindrome()
