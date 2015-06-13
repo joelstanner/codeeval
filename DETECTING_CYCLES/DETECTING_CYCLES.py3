@@ -45,7 +45,14 @@ def detect_cycle(input_file):
 
 
 def cycle_check(cycle_line):
-    """find the cycle"""
+    """find the cycle
+
+    This is not efficient, but for a small sequence (50 ints) it works ok.
+    Consider deque.
+
+    Pop the first item from the front of the list. See if that item exists
+    still in the list. If so, construct the loop list to return.
+    """
     while cycle_line:
         check1 = cycle_line.pop(0)
         if check1 in cycle_line:
