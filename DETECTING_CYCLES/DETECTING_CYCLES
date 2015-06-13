@@ -39,26 +39,39 @@ def detect_cycle(input_file):
         for line in f:
             cycle_line = [int(x) for x in line.split()]
             result = cycle_check(cycle_line)
-            print((x for x in result), sep=" ")
+            print(*result, sep=" ")
 
 
 def cycle_check(cycle_line):
-    tortise = 0
-    hare = 0
+    """Run cycle check based on tortise/hare algo."""
+    tortuga = 1
+    hare = 2
 
-    while hare < len(cycle_line):
-        hare += 2
-        tortise += 1
-        if cycle_line[tortise] == cycle_line[hare]:
-            cycle_start = cycle_line[tortise]
-            cycle_end = None
-            cycle = []
-            while cycle_line[tortise] != cycle_end:
-                cycle.append(cycle_line[tortise])
-                tortise += 1
-                cycle_end = cycle_start
-            return cycle
+    # find the cycle using tortoise and hare
+    try:
+        while cycle_line[tortuga] != cycle_line[hare]:
+            hare += 2
+            tortuga += 1
+            if hare >= len(cycle_line):
+                hare = len(cycle_line) - 1
+    except IndexError:
+        return "No Loop Found"
 
+    # Find the index of the first position of the cycle
+    mu_index = 0  # index of first cycle
+    tortuga = 0
+    while cycle_line[tortuga] != cycle_line[hare]:
+        tortuga += 1
+        hare += 1
+        mu_index += 1
+
+    lam = 1  # lam is the length of the cycle period
+    hare = cycle_line[tortuga + 1]
+    while cycle_line[tortuga] != cycle_line[hare]:
+        hare += 1
+        lam += 1
+
+    return cycle_line[mu_index:mu_index + lam]
 
 if __name__ == '__main__':
     detect_cycle(INPUT_FILE)
