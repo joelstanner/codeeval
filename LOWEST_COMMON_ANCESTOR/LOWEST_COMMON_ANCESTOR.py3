@@ -1,4 +1,4 @@
-# pylint: disable=R0903,C0103,R0201
+# pylint: disable=R0903,C0103,R0201,W0141
 """
 Write a program to determine the lowest common ancestor of two nodes in a
 binary search tree. You may hardcode the following binary search tree in your
@@ -81,7 +81,7 @@ class BinaryTree(object):
     def contains(self, val):
         """If node is found in tree, return list of parent nodes"""
         if not self.root:
-            return False
+            return []
         else:
             node = self.root
             parent_list = []
@@ -91,13 +91,13 @@ class BinaryTree(object):
                         parent_list.append(node.val)
                         node = node.right_child
                     else:
-                        return False
+                        return []
                 elif val < node.val:
                     if node.left_child:
                         parent_list.append(node.val)
                         node = node.left_child
                     else:
-                        return False
+                        return []
                 elif node.val == val:
                     if node == self.root:
                         parent_list.append(node.val)
@@ -204,14 +204,13 @@ def lowest_common_ancestor(btree, val1, val2):
     """As per challenge, find lowest common ancestor"""
     parent_list1 = btree.contains(val1)
     parent_list2 = btree.contains(val2)
-    lca = 0
-    try:
-        for i in range(max(len(parent_list1), len(parent_list2))):
-            if parent_list1[i] == parent_list2[i]:
-                lca = parent_list1[i]
-    except IndexError:
-        pass
-    return lca
+    last = None
+    for x, y in zip(parent_list1, parent_list2):
+        if x == y:
+            last = x
+        else:
+            break
+    return last
 
 
 def hardcode_tree():
