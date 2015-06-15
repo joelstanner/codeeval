@@ -29,6 +29,11 @@ Here's why 22 is NOT a happy number:
 
 import sys
 
+def parse_input(input_file):
+    with open(input_file, mode="r") as file:
+        for line in file:
+            happiness(line.rstrip())
+
 
 def happiness(num):
     """Return 1 if number is happy, 0 if not
@@ -50,4 +55,5 @@ def happiness(num):
 
 
 if __name__ == '__main__':
-    happiness(sys.argv[1])
+    INPUT_FILE = sys.argv[1]
+    parse_input(INPUT_FILE)
