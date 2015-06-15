@@ -30,16 +30,6 @@ Here's why 22 is NOT a happy number:
 import sys
 
 
-def memoize(func):
-    """memoize decorator"""
-    cache = {}
-
-    return (
-        lambda *args: cache[args] if args in cache else
-        cache.update({args: func(*args)}) or cache[args])
-
-
-# @memoize
 def happiness(num):
     """Return 1 if number is happy, 0 if not
 
