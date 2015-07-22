@@ -58,14 +58,11 @@ def main(input_file):
 def calculate_beauty(line):
     line = line.lower().rstrip()
     beauty_dict = {}
-    beauty_count = 26
 
     for char in line:
         if char.isalpha():
-            beauty_num = beauty_dict.get(char, 0)
-            if beauty_num > 0:
-                beauty_dict[char] = beauty_num + beauty_count
-            beauty_count -= 1
+            char_count = beauty_dict.get(char, 0)
+            beauty_dict[char] = char_count + 1
 
     b_dict_sort = sorted(beauty_dict.values(), reverse=True)
 
