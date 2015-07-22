@@ -48,6 +48,7 @@ Print out the maximum beauty for the string. E.g.
 
 from sys import argv
 
+
 def main(input_file):
     with open(input_file, 'r') as in_file:
         for line in in_file:
@@ -64,20 +65,16 @@ def calculate_beauty(line):
             char_count = beauty_dict.get(char, 0)
             beauty_dict[char] = char_count + 1
 
-    print(beauty_dict)
-    b_dict_values = beauty_dict.values()
-    beauty_number = 0
+    b_dict_sort = sorted(beauty_dict.values(), reverse=True)
 
-    for val in b_dict_values:
-        if val > 1:
-            beauty_calc = ((val * 26) - ((val * (val + 1) // 2)) + val)
-            beauty_number += beauty_calc
-            print("beauty_calc:", beauty_calc, "--beauty_num:", beauty_number)
-        else:
-            beauty_number += 26
-            print("beauty_calc:", 26, "beauty_num:", beauty_number)
+    beauty_num = 26
+    beauty_total = 0
 
-    return beauty_number
+    for val in b_dict_sort:
+        beauty_total += val * beauty_num
+        beauty_num -= 1
+
+    return beauty_total
 
 if __name__ == '__main__':
     main(argv[1])
