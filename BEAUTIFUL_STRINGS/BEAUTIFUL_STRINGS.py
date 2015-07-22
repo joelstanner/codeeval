@@ -43,8 +43,7 @@ Print out the maximum beauty for the string. E.g.
 646
 """
 
-# Every time a letter is used, it is 26 beauty. Each subsequent use of a
-# letter is 26 minus 1 for how many times it has already been used
+# Most used letter is 26, 2nd most is 25, and so on.
 
 from sys import argv
 
@@ -58,15 +57,16 @@ def main(input_file):
 def calculate_beauty(line):
     line = line.lower().rstrip()
     beauty_dict = {}
+    beauty_count = 26
 
     for char in line:
         if char.isalpha():
-            char_count = beauty_dict.get(char, 0)
-            beauty_dict[char] = char_count + 1
+            beauty_num = beauty_dict.get(char, 0)
+            if beauty_num > 0:
+                beauty_dict[char] = beauty_num + beauty_count
+            beauty_count -= 1
 
-    print(beauty_dict)
     b_dict_values = beauty_dict.values()
-    beauty_number = 0
 
     for val in b_dict_values:
         if val > 1:
