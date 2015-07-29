@@ -61,8 +61,24 @@ def build_max(string1_redux, string2_redux):
 def main(input_file):
     with open(input_file, "r") as file:
         # split strings on the semi-colon
-        # determine common letters using a set
-        # make new strings with only common letters in order
-        # create dictionary with index pos of each char in 2nd string
+        for line in file:
+            string1, string2 = line.rstrip().split(';')
+
+            # determine common letters using a set
+            string_set = set(string1) & set(string2)
+
+            # make new strings with only common letters in order
+            string1_redux = new_string_from_set(string_set, string1)
+            string2_redux = new_string_from_set(string_set, string2)
+
+        # create dictionary with index pos of each char in string as a list
+        # because there may be some duplicate characters.
+        # regex, or recurse, or... etc.. ??
+
+
+        # or: iterate over chars, find corresponding letter in 2nd string
+        build_max(string1_redux, string2_redux)
 
         pass
+
+
