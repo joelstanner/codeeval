@@ -87,8 +87,12 @@ def main(input_file):
             string2_char_positions = make_char_dict(string2_redux)
 
             # build the max len
-            build_max(string1_redux, string2_redux)
+            max_string = build_max(
+                string1_redux, string2_redux, string1_char_positions,
+                string2_char_positions)
 
-        pass
+            print(max_string)
 
 
+if __name__ == '__main__':
+    main(argv[1])
