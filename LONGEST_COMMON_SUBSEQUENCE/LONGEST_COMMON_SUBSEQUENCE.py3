@@ -26,6 +26,15 @@ MJAU
 from sys import argv
 
 
+def new_string_from_set(string_set, string):
+    """Return a string with only characters in the set."""
+    for char in string:
+        if char not in string_set:
+            string = string.replace(char, "")
+
+    return string
+
+
 def main(input_file):
     with open(input_file, "r") as file:
         # split strings on the semi-colon
