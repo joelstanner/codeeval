@@ -36,35 +36,68 @@ def new_string_from_set(string_set, string):
     return string
 
 
-def build_max(string1_redux, string2_redux):
-    str_pos1 = 0
-    str_pos2 = 0
+def build_max(string1_redux, string2_redux,
+              string1_char_positions, string2_char_positions):
+    str1_pointer = 0
+    str1_temp_pointer = 0
+    str2_pointer = 0
+    temp_pointer = 0
     temp_str = ""
     max_string = ""
+    temp_max_str = ""
+    ultimate_max = min(len(string1_redux), len(string2_redux))
 
-    char = string1_redux[str_pos1]
-    str_pos2 = string2_redux.index(char)
+    while (len(max_string) <= ultimate_max and
+           len(max_string) < ultimate_max - str1_pointer):
+        char = string1_redux[str1_temp_pointer]
+        str2_pointer = next(string2_char_positions[char])
 
-    # chop off letters prior to found char.
-    temp_str = string2_redux[str_pos2:]
+        # chop off letters of string 2 prior to found char.
+        temp_str = string2_redux[str2_pointer:]
 
-    # Keep max len string until a longer one is found.
-    max_string += char
+        # Keep max len string until a longer one is found.
+        temp_max_str += char
+        if len(temp_max_str) > len(max_string):
+            max_string = temp_max_str
 
-    # next char is string2_redux's next
-    str_pos1 = # next str1 index pos of str2 next char - from list
+        # next char to find in string1 is temp_str's next
+        try:
+            temp_pointer = next(string1_char_positions[temp_str[1]])
+            if temp_pointer < str1_pointer:
+                str1_pointer += 1
+                str1_temp_pointer = str1_pointer
+                temp_max_str = ""
+                string1_char_positions = make_char_dict(string1_redux)
+                string2_char_positions = make_char_dict(string2_redux)
+                continue
+            elif temp_pointer < str1_temp_pointer:
+                str1_pointer += 1
+                continue
+            else:
+                str1_temp_pointer = temp_pointer
+                continue
+        except StopIteration:
+            str1_pointer += 1
+            str1_temp_pointer = str1_pointer
+            temp_max_str = ""
+            string1_char_positions = make_char_dict(string1_redux)
+            string2_char_positions = make_char_dict(string2_redux)
 
-    # iterate next char, drop chars in 2nd until next char found
+        except IndexError:
+            str1_pointer += 1
+            str1_temp_pointer = str1_pointer
+            temp_max_str = ""
+            string1_char_positions = make_char_dict(string1_redux)
+            string2_char_positions = make_char_dict(string2_redux)
 
-    # Perhaps do it again by dropping 1st string chars
-    #     - might make a difference
+    return max_string
 
 
 def make_char_dict(string):
     char_dict = {}
     for char in string:
         if char not in char_dict:
-            char_dict[char] = (m.start for m in re.finditer(char, string))
+            char_dict[char] = (m.start() for m in re.finditer(char, string))
     return char_dict
 
 
