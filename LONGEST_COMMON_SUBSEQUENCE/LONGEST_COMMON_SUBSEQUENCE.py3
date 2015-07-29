@@ -35,6 +35,29 @@ def new_string_from_set(string_set, string):
     return string
 
 
+def build_max(string1_redux, string2_redux):
+    str_pos1 = 0
+    str_pos2 = 0
+    temp_str = ""
+    max_string = ""
+
+    char = string1_redux[str_pos1]
+    str_pos2 = string2_redux.index(char)
+
+    # chop off letters prior to found char.
+    temp_str = string2_redux[str_pos2:]
+
+    # Keep max len string until a longer one is found.
+    max_string += char
+
+    # next char is string2_redux's next
+    str_pos1 = # next str1 index pos of str2 next char - from list
+
+    # iterate next char, drop chars in 2nd until next char found
+
+    # Perhaps do it again by dropping 1st string chars
+    #     - might make a difference
+
 def main(input_file):
     with open(input_file, "r") as file:
         # split strings on the semi-colon
