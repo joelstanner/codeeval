@@ -24,6 +24,7 @@ on each line you print. E.g.
 MJAU
 """
 from sys import argv
+import re
 
 
 def new_string_from_set(string_set, string):
@@ -57,6 +58,15 @@ def build_max(string1_redux, string2_redux):
 
     # Perhaps do it again by dropping 1st string chars
     #     - might make a difference
+
+
+def make_char_dict(string):
+    char_dict = {}
+    for char in string:
+        if char not in char_dict:
+            char_dict[char] = (m.start for m in re.finditer(char, string))
+    return char_dict
+
 
 def main(input_file):
     with open(input_file, "r") as file:
