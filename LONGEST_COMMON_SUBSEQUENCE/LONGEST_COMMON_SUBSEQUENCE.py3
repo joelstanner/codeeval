@@ -36,6 +36,15 @@ def new_string_from_set(string_set, string):
     return string
 
 
+def _clear_dicts(string1_char_positions, string1_redux,
+                 string2_char_positions, string2_redux):
+    string1_char_positions.clear()
+    string2_char_positions.clear()
+    string1_char_positions = make_char_dict(string1_redux)
+    string2_char_positions = make_char_dict(string2_redux)
+    return string1_char_positions, string2_char_positions
+
+
 def build_max(string1_redux, string2_redux,
               string1_char_positions, string2_char_positions):
     str1_pointer = 0
@@ -46,9 +55,14 @@ def build_max(string1_redux, string2_redux,
     max_string = ""
     temp_max_str = ""
     ultimate_max = min(len(string1_redux), len(string2_redux))
+    cycles = 0
 
     while (len(max_string) <= ultimate_max and
            len(max_string) < ultimate_max - str1_pointer):
+        print("cycles:", cycles)
+        cycles += 1
+
+        # Set the string 1 character
         char = string1_redux[str1_temp_pointer]
         str2_pointer = next(string2_char_positions[char])
 
@@ -60,6 +74,17 @@ def build_max(string1_redux, string2_redux,
         if len(temp_max_str) > len(max_string):
             max_string = temp_max_str
 
+        # check if string 1 is finished, continue while loop if so
+        if str1_temp_pointer + 1 == len(string1_redux):
+            str1_pointer += 1
+            str1_temp_pointer = str1_pointer
+            temp_max_str = ""
+            string1_char_positions, string2_char_positions = (
+                _clear_dicts(string1_char_positions, string1_redux,
+                             string2_char_positions, string2_redux)
+            )
+            continue
+
         # next char to find in string1 is temp_str's next
         try:
             temp_pointer = next(string1_char_positions[temp_str[1]])
@@ -67,8 +92,10 @@ def build_max(string1_redux, string2_redux,
                 str1_pointer += 1
                 str1_temp_pointer = str1_pointer
                 temp_max_str = ""
-                string1_char_positions = make_char_dict(string1_redux)
-                string2_char_positions = make_char_dict(string2_redux)
+                string1_char_positions, string2_char_positions = (
+                    _clear_dicts(string1_char_positions, string1_redux,
+                                 string2_char_positions, string2_redux)
+                )
                 continue
             elif temp_pointer < str1_temp_pointer:
                 str1_pointer += 1
@@ -80,15 +107,19 @@ def build_max(string1_redux, string2_redux,
             str1_pointer += 1
             str1_temp_pointer = str1_pointer
             temp_max_str = ""
-            string1_char_positions = make_char_dict(string1_redux)
-            string2_char_positions = make_char_dict(string2_redux)
+            string1_char_positions, string2_char_positions = (
+                _clear_dicts(string1_char_positions, string1_redux,
+                             string2_char_positions, string2_redux)
+            )
 
         except IndexError:
             str1_pointer += 1
             str1_temp_pointer = str1_pointer
             temp_max_str = ""
-            string1_char_positions = make_char_dict(string1_redux)
-            string2_char_positions = make_char_dict(string2_redux)
+            string1_char_positions, string2_char_positions = (
+                _clear_dicts(string1_char_positions, string1_redux,
+                             string2_char_positions, string2_redux)
+            )
 
     return max_string
 
