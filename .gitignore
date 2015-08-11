@@ -56,3 +56,5 @@ docs/_build/
 # PyBuilder
 target/
 sandbox
+set_of_stacks.py
+test_set_of_stacks.py
