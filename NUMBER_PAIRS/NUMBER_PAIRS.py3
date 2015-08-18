@@ -52,3 +52,16 @@ def parse_output(output_list):
     return ";".join(output)
 
 
+def main(input_file):
+    with open(input_file, 'r') as file:
+        for line in file:
+            num_list, minuend = parse_line(line)
+            pairs = number_pairs(num_list, minuend)
+            out_line = parse_output(pairs)
+            if out_line is not []:
+                print(out_line)
+            else:
+                print('NULL')
+
+if __name__ == '__main__':
+    main(argv[1])
