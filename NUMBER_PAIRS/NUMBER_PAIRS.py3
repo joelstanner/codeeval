@@ -35,3 +35,12 @@ def number_pairs(num_list, minuend):
             pairs.append((subtrahend, diff))
             num_list.remove(diff)
     return pairs
+
+
+def parse_line(line):
+    num_list, minuend = line.split(';')
+    num_list = [int(num) for num in num_list.split(',')]
+    minuend = int(minuend)
+    return num_list, minuend
+
+
