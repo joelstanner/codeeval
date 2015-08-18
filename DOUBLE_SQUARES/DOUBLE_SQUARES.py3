@@ -56,10 +56,10 @@ def doublesquare(number):
     """Determines how many double squares a number has.
     From http://articles.leetcode.com/2011/01/double-square-problem-analysis.html
     Consider that:
-    M = x2 + y2,
-    and we have y2 = M – x2.
+    M = x^2 + y^2,
+    and we have y^2 = M – x^2.
 
-    We can easily tell if (M - x2) is a perfect square by taking the square
+    We can easily tell if (M - x^2) is a perfect square by taking the square
     root of it and compare it to its truncated value (deleting its fractional
     part). If both are equal, then it must be a perfect square, or else it is
     not.
