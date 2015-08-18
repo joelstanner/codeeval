@@ -28,6 +28,20 @@ from sys import argv
 
 
 def number_pairs(num_list, minuend):
+    """Return a list of number pairs that sum to the minuend.
+
+    This is accomplished by iterating a list of integers and
+    subtracting the number from the minuend. If the difference from
+    that operation is also in our list of numbers, then we have a pair.
+    Remove the second number (diff) from the list so we don't duplicate.
+
+    Args:
+        num_list: A sorted list of integers.
+        minuend: The number we are looking to find sums of in our num_list.
+
+    Returns:
+        A list of tuples that sum to the minuend.
+    """
     pairs = []
     for subtrahend in num_list:
         diff = minuend - subtrahend
@@ -38,6 +52,11 @@ def number_pairs(num_list, minuend):
 
 
 def parse_line(line):
+    """Returns a list of ints and a minuend integer.
+
+    The line needs to be in the form '1,2,3,...;5' as described in the module
+    docstring
+    """
     num_list, minuend = line.split(';')
     num_list = [int(num) for num in num_list.split(',')]
     minuend = int(minuend)
@@ -45,6 +64,7 @@ def parse_line(line):
 
 
 def parse_output(output_list):
+    """Return a string formed like so: '1,4;2,3'"""
     output = []
     for pair in output_list:
         temp = ",".join([str(num) for num in pair])
@@ -53,6 +73,7 @@ def parse_output(output_list):
 
 
 def main(input_file):
+    """Iterate the lines of a text file and print the results."""
     with open(input_file, 'r') as file:
         for line in file:
             num_list, minuend = parse_line(line)
