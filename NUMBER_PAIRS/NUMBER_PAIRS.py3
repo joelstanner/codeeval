@@ -58,7 +58,7 @@ def main(input_file):
             num_list, minuend = parse_line(line)
             pairs = number_pairs(num_list, minuend)
             out_line = parse_output(pairs)
-            if out_line is not []:
+            if not out_line == '':
                 print(out_line)
             else:
                 print('NULL')
