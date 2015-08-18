@@ -44,3 +44,11 @@ def parse_line(line):
     return num_list, minuend
 
 
+def parse_output(output_list):
+    output = []
+    for pair in output_list:
+        temp = ",".join([str(num) for num in pair])
+        output.append(temp)
+    return ";".join(output)
+
+
