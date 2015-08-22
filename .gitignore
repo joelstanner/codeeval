@@ -58,3 +58,4 @@ target/
 sandbox
 set_of_stacks.py
 test_set_of_stacks.py
+rename.sh
