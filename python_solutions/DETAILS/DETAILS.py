@@ -61,6 +61,7 @@ def main(input_file):
 
 
 def get_details(line):
+    """Calculate the number of spaces Y will move and return it."""
     empty = None
     empty_min = 10
 
