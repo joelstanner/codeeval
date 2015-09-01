@@ -30,7 +30,7 @@ import re
 def parse_input(string):
     """Return true if email is valid, else false."""
     string = string.rstrip()
-    match = re.search(r'(\S+)(?=@)@((?!@)(\S+)[.][a-zA-Z]+)', string)
+    match = re.search(r'^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$', string)
 
     if match is not None:
         print('true')
