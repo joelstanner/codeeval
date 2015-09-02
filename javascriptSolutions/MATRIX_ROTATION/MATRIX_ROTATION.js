@@ -43,28 +43,21 @@ var createMatrix = function (line) {
     for (var i=0; i < matrixSize; i++) {
         matrix.push(line.splice(0, matrixSize))
     }
-    //console.log(matrix);
 
-    for (var i=0; i < matrixSize; i++) {
+    for (i=0; i < matrixSize; i++) {
         transposedMatrix[i] = [];        
         for (var j=0; j < matrixSize; j++) {
             transposedMatrix[i][j] = matrix[j][i];
         }
     }
-    //console.log(transposedMatrix)
-    
+
     for (i=0; i < matrixSize; i++) {
         transposedMatrix[i].reverse()
     }
-    //console.log(transposedMatrix)
-    
+
     output = transposedMatrix.join().split(',').join(" ")
-    
     return output;
 }
-
-//var testLine = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
-console.log(createMatrix(testLine));
 
 
 var fs  = require("fs");
@@ -72,7 +65,7 @@ fs.readFileSync(process.argv[2]).toString()
                                 .split('\n')
                                 .forEach(function (line) {
     if (line !== "") {
-        var result = rotMatrix(line.split(" "))
+        var result = createMatrix(line.split(" "))
         console.log(result)
     }
 });
