@@ -35,11 +35,15 @@ The N size of the matrix can be from 1 to 10
 The number of test cases is 100
 */
 var createMatrix = function (line) {
+    // Matrix size (NxN) is the square root of the total number of items
+    // 90deg rotation of matrix is 1st: transpose rows and cols,
+    // 2nd: reverse rows
+
     var matrixSize = Math.pow(line.length, (1 / 2)),
         matrix = [],
         transposedMatrix = [],
         output = "";
-    
+
     for (var i=0; i < matrixSize; i++) {
         matrix.push(line.splice(0, matrixSize))
     }
