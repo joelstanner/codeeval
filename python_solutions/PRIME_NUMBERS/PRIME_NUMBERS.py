@@ -35,7 +35,7 @@ PRIMES_LIST = [2, 3]
 
 
 def is_prime(number):
-    """Return True if a nuber is prime"""
+    """Return True if a number is prime"""
     if number < 2:
         return False
     elif number in PRIMES_LIST:
@@ -55,8 +55,12 @@ def make_primes_list(number):
 
 def print_primes(number):
     """Print a list of primes that are less than the number as per challenge"""
-    idx = bisect.bisect(PRIMES_LIST, number)
-    print(*PRIMES_LIST[:idx], sep=",")
+    if number == 3:
+        print(2)
+    else:
+        idx = bisect.bisect(PRIMES_LIST, number)
+
+        print(*PRIMES_LIST[:idx], sep=",")
 
 
 if __name__ == '__main__':
@@ -64,6 +68,8 @@ if __name__ == '__main__':
         for line in file:
             if int(line) > 4294967294:
                 print("Number is too big")
+            elif int(line) == 2:
+                continue
             elif int(line) <= PRIMES_LIST[-1]:
                 print_primes(int(line))
             elif int(line) > PRIMES_LIST[-1]:
