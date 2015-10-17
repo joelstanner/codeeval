@@ -46,7 +46,6 @@ def is_prime(number):
 def make_primes_list(number):
     """Make a list of primes less than number.
 
-    Output will be like so: [2, 3, 5, 7, 11, 13...]
     Only add primes that are not currently in the list
     """
     for num in range(PRIMES_LIST[-1] + 2, number, 2):
@@ -63,7 +62,7 @@ def print_primes(number):
 if __name__ == '__main__':
     with open(argv[1], 'r') as file:
         for line in file:
-            if int(line) > 4294967295:
+            if int(line) > 4294967294:
                 print("Number is too big")
             elif int(line) <= PRIMES_LIST[-1]:
                 print_primes(int(line))
