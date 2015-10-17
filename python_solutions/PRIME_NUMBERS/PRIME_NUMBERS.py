@@ -65,7 +65,7 @@ if __name__ == '__main__':
         for line in file:
             if int(line) > 4294967295:
                 print("Number is too big")
-            elif int(line) < PRIMES_LIST[-1]:
+            elif int(line) <= PRIMES_LIST[-1]:
                 print_primes(int(line))
             elif int(line) > PRIMES_LIST[-1]:
                 make_primes_list(int(line))
