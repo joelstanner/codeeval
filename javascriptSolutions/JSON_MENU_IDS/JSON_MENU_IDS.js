@@ -23,21 +23,21 @@
 //0
 //248
 var calculateIdSums = function (line) {
-    var itemSum = 0
+    var itemSum = 0;
     for (var i = 0; i < line.menu.items.length; i++) {
         if (line.menu.items[i] && line.menu.items[i].label) {
-            itemSum += parseInt(line.menu.items[i].label.split(' ')[1], 10)
+            itemSum += parseInt(line.menu.items[i].label.split(' ')[1], 10);
         }
     }
     return itemSum;
-}
+};
 
 var fs  = require("fs");
 fs.readFileSync(process.argv[2]).toString()
                                 .split('\n')
                                 .forEach(function (line) {
     if (line !== "") {
-        var result = calculateIdSums(JSON.parse(line))
-        console.log(result)
+        var result = calculateIdSums(JSON.parse(line));
+        console.log(result);
     }
 });
