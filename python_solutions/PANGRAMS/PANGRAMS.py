@@ -48,7 +48,7 @@ def missing_letters(sentence):
     Return the sorted difference between this set and the letters of the
     alphabet.
     """
-    set1 = ("".join(
+    set1 = set("".join(
         char for char in sentence if char not in punctuation + " ").lower()
     )
     return sorted(ALPHA - set1)
@@ -65,4 +65,5 @@ def print_output(char_list):
 if __name__ == "__main__":
     lines = readfile(argv[1])
     for line in lines:
-        print_output(*missing_letters(line))
+        char_list = missing_letters(line)
+        print_output(char_list)
