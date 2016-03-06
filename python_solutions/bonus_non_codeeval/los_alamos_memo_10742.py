@@ -30,31 +30,33 @@ ENGLISH_NUM_WORDS = {0: "zero",
                      90: "ninety",
                      100: "one hundred",
                      }
-
-english_list = []
 word_nums = {}  # English as keys, numbers as values
 
 
-def build_list():
+def build_word_dict():
+    """Build a dictionary of word keys and corresponding int values."""
     for i in range(101):
         if i <= 20:
-            english_list.append(ENGLISH_NUM_WORDS[i])
             word_nums.setdefault(ENGLISH_NUM_WORDS[i], i)
         elif i < 100:
             num_word = get_num_word(i)
-            english_list.append(num_word)
             word_nums.setdefault(num_word, i)
         else:
-            english_list.append(ENGLISH_NUM_WORDS[i])
             word_nums.setdefault(num_word, i)
 
     # "ten" must be removed to be accurate with the original 1947 memo
-    english_list.remove('ten')
-    return sorted(english_list)
+    word_nums.pop('ten')
 
 
 def get_num_word(num):
+    """Input an int, return an english word representations as as string."""
     num_str = str(num)
     tens = int(num_str[0] + "0")
     ones = int(num_str[1])
     return " ".join([ENGLISH_NUM_WORDS[tens], ENGLISH_NUM_WORDS[ones]])
+
+
+if __name__ == '__main__':
+    build_word_dict()
+    out = [value for (key, value) in sorted(word_nums.items())]
+    print(*out, sep=", ")
