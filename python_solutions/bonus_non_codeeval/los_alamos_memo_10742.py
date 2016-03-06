@@ -32,17 +32,21 @@ ENGLISH_NUM_WORDS = {0: "zero",
                      }
 
 english_list = []
+word_nums = {}  # English as keys, numbers as values
 
 
-def main():
+def build_list():
     for i in range(101):
         if i <= 20:
             english_list.append(ENGLISH_NUM_WORDS[i])
+            word_nums.setdefault(ENGLISH_NUM_WORDS[i], i)
         elif i < 100:
             num_word = get_num_word(i)
             english_list.append(num_word)
+            word_nums.setdefault(num_word, i)
         else:
             english_list.append(ENGLISH_NUM_WORDS[i])
+            word_nums.setdefault(num_word, i)
 
     # "ten" must be removed to be accurate with the original 1947 memo
     english_list.remove('ten')
