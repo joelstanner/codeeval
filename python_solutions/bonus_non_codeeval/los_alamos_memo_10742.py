@@ -36,12 +36,10 @@ word_nums = {}  # English as keys, numbers as values
 def build_word_dict():
     """Build a dictionary of word keys and corresponding int values."""
     for i in range(101):
-        if i <= 20:
+        if i <= 20 or i % 10 == 0:
             word_nums.setdefault(ENGLISH_NUM_WORDS[i], i)
-        elif i < 100:
-            num_word = get_num_word(i)
-            word_nums.setdefault(num_word, i)
         else:
+            num_word = get_num_word(i)
             word_nums.setdefault(num_word, i)
 
     # "ten" must be removed to be accurate with the original 1947 memo
