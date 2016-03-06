@@ -47,7 +47,10 @@ def build_word_dict():
 
 
 def get_num_word(num):
-    """Input an int, return an english word representations as as string."""
+    """Input an int, return an english word representation as a string.
+
+    This only works for numbers 0 - 100... so don't even thing about it...
+    """
     num_str = str(num)
     tens = int(num_str[0] + "0")
     ones = int(num_str[1])
