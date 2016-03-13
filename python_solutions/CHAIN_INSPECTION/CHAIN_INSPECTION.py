@@ -54,6 +54,17 @@ names and the address are separating by dash. E.g.
     Constraints:
     The number of pairs in a chain is in range [1, 500]
     The addresses are integers in range [2, 10000]
+-------------------------------------------------------
+process:
+
+Read a line from the input file
+split the chain parts into pairs
+create a dictionary of chain connections
+determine if chain is good or bad:
+    Trace from BEGIN
+    Find END
+    Detect loops
+    Detect missed chain links
 """
 from sys import argv
 
@@ -62,23 +73,13 @@ def make_links(line):
     """Split a line into parts, return a dictionary of chain links."""
     link_parts = line.split(";")
     chain_dict = {
-            k: v for k, v in tuple([x.split('-') for x in link_parts])
+        k: v for k, v in tuple([x.split('-') for x in link_parts])
     }
     return chain_dict
 
 
 def inspect_chain(chain):
     """Return whether a chain is 'GOOD' or 'BAD'."""
-    if 'END' not in chain or 'BEGIN' not in chain:
-        return "BAD"
-
-    #    chain_checker_list = []
-    #    for key in chain:
-    #        if chain[key] not in chain_checker_list:
-    #            chain_checker_list.append(chain[key])
-    #        else:
-    #            return 'BAD'
-
     next_key = chain.pop('BEGIN')
     while True:
         try:
@@ -95,8 +96,8 @@ def inspect_chain(chain):
 
 def main(input_file):
     """Run the process as described in the challenge description."""
-    with open(input_file, "r") as f:
-        for line in f:
+    with open(input_file, "r") as file:
+        for line in file:
             line = line.rstrip()
 
             # split the chain parts into pairs
@@ -109,17 +110,3 @@ def main(input_file):
 
 if __name__ == "__main__":
     main(argv[1])
-
-
-"""
-process:
-
-Read a line from the input file
-split the chain parts into pairs
-create a dictionary of chain connections
-determine if chain is good or bad:
-    Trace from BEGIN
-    Find END
-    Detect loops
-    Detect missed chain links
-"""
