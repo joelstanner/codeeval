@@ -101,11 +101,16 @@ CONSTRAINTS:
 M is in range [100, 300]
 N is in range [800, 1200]
 
-(0x[a-f0-9]{2,}\.?)  - Any hex number like 0xe5.
-\d+\.\d+             - Any 2 numbers with a dot in between
-(\d{3,})             - Digits with 3 or more characters
+(?:0x[a-f0-9]{2}\.){3}(?:0x[a-f0-9]{2})
+    - Any hex dot string number like 0x59.0xe5.0x82.0xe1
+(?:0x[0-9a-f]{8})            - Hex 0x12345678
+\d+\.\d+                      - Any 2 numbers with a dot in between
+(\d{4,})                      - Digits with 3 or more characters
+(?:\d{1,3}\.){3}\d{1,3}       - 0.0.0.0
+([01]{12,})                   - Big binary nums
+(?:[01]{8}\.){3}(?:[01]{8})   - 01010101.01010101...
+(?:0\d{3,}\.){3}(?:0\d{3,})   - octal with dots
+(?:0\d{7,})                   - octal no dots
+
 """
-from sys import argv
-
-
-TEST_LINE1 = "VA,8Z%z-AYzp6o{qeX3Q|\`Zw7{78:Y80qP-,b0BDVvZh60x59.0xe5.0x82.0xe1uptW8eF8C]nKJ9c(AtXa9>Dy}nF'Jr"
+TEST_LINE1 = "VA,8Z%z-AYzp6o{qeX3Q|\`Zw7{78:Y80qP-,b0BDVvZh60x59.0xe5.0x82.0xe1uptW8eF8C]nKJ9c(AtXa9>Dy}nF'Jr"  # noqa
